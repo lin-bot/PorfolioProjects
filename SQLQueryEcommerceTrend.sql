@@ -1,7 +1,8 @@
 
 --SUMMARY OF THE PROJECT:
-The main objective was to identify the peak sales periods. In order to accomplish this goal,
-the data was cleaned and prepared to aggregate sales over time. A monthly sales column 
+--The main objective was to identify the peak sales periods. In order to accomplish this goal,
+--the data was cleaned and prepared to aggregate sales over time. A monthly sales column was created to calculate total sales. Trends were  identify 
+-- by calculating rolling monthly averages, and peak periods by tying them to a holiday event or season or external peak.
 
 
 --1. DATA CLEANING AND PREPARATION
@@ -68,8 +69,7 @@ group by Year(InvoiceDate)
 	, Month(InvoiceDate)
 order by SalesYear, SalesMonth;
 
---average order value per day or month and visualize the trends creating a chart
--- IN ORDER TO CREATE THE CHARTS I CAN USE EXCEL OR POWERBI 
+--average order value per day or month
 with DailySales as(
 	select CAST(InvoiceDate as date) as SalesDate --separate each date
 	,SUM(TotalSales) as DailySales
@@ -250,4 +250,5 @@ from PeakPeriods
 left join Holidays
 on salesMonth between StartMonth and  EndMonth
 order by SalesYear, SalesMonth
+
 
